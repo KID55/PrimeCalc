@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:id="@+id/Rampampam">
+    android:id="@+id/Rampampam"
+    android:background="@color/BackgroundColor">
 
 
     <TextView
@@ -34,7 +35,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/aField"
         android:layout_alignTop="@+id/textView"
         android:layout_toRightOf="@+id/textView"
         android:layout_toLeftOf="@+id/button"
@@ -46,7 +47,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/bField"
         android:layout_alignTop="@+id/textView2"
         android:layout_toRightOf="@+id/textView2"
         android:layout_toLeftOf="@+id/button"
@@ -60,18 +61,21 @@
         android:id="@+id/button"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_alignTop="@+id/editText"
+        android:layout_alignBottom="@+id/bField"
+        android:layout_alignTop="@+id/aField"
         android:clickable="true"
+        android:onClick="onClick"
         android:enabled="true" />
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:id="@+id/listView"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp" />
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="233dp"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

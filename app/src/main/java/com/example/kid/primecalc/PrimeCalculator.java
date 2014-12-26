@@ -15,7 +15,7 @@ public class PrimeCalculator {
     private int p;
 
 
-    String res = "";
+    ArrayList<String> res = new ArrayList<String>();
     String resRandom = "";
     int counter = 0;
     double preresult = 0;
@@ -38,10 +38,10 @@ public class PrimeCalculator {
         this.p = x;
     }
 
-    public ArrayList<Boolean> createList() throws IOException {
-        BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+    public ArrayList<Boolean> createList(int b) throws IOException {
+        //BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
         ArrayList<Boolean> fillArray = new ArrayList<Boolean>();
-        System.out.println("Input 'A'");
+        /*System.out.println("Input 'A'");
         try {
             setA(Integer.parseInt(is.readLine()));
         } catch (NumberFormatException e) {
@@ -58,13 +58,13 @@ public class PrimeCalculator {
             setP(Integer.parseInt(is.readLine()));
         } catch (NumberFormatException e) {
             System.out.println("'P' must be a number!");
-        }
+        }*/
         for (int x = 0; x <= b; x++) fillArray.add(true);
 
         return fillArray;
     }
 
-    public String calc(ArrayList<Boolean> arrList, int a) {
+    public ArrayList<String> calc(ArrayList<Boolean> arrList, int a) {
         arrList.set(0, false);
         arrList.set(1, false);
         for (int i = 2; i < arrList.size(); i++) {
@@ -78,13 +78,14 @@ public class PrimeCalculator {
         for (int k = 0; k <= a; k++) arrList.set(k, false);
 
         for (int y = 0; y < arrList.size(); y++) {
+            for (int z = 0; z < arrList.size(); z++){
             if (arrList.get(y)) {
-                res += y + " ";
-            }
+                res.add(Integer.toString(y));
+            }}
         }
 
 
-        if (res == "") res = "Within a predetermined range no primes";
+        //if (res == ) res = "Within a predetermined range no primes";
 
         return res;
     }
