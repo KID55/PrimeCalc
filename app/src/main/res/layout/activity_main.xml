@@ -45,7 +45,8 @@
         android:focusableInTouchMode="true"
         android:hint="@string/aHint"
         android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button" />
+        android:layout_toStartOf="@+id/button"
+        android:numeric="integer" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -62,7 +63,9 @@
         android:layout_below="@+id/aField"
         android:layout_toRightOf="@+id/textView"
         android:layout_alignRight="@+id/aField"
-        android:layout_alignEnd="@+id/aField" />
+        android:layout_alignEnd="@+id/aField"
+        android:numeric="integer"
+        android:elegantTextHeight="false" />
 
     <Button
         android:layout_width="wrap_content"

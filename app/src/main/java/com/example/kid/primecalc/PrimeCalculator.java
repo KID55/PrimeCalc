@@ -1,5 +1,11 @@
 package com.example.kid.primecalc;
 
+import android.app.Application;
+import android.content.Context;
+import android.text.Editable;
+import android.view.Gravity;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,6 +19,8 @@ public class PrimeCalculator {
     private int a;
     private int b;
     private int p;
+    private boolean ok = false;
+    public static int duration = Toast.LENGTH_LONG;
 
 
     ArrayList<String> res = new ArrayList<String>();
@@ -22,21 +30,27 @@ public class PrimeCalculator {
     double result = 0;
 
 
-    /*public void setA(int x){
-        if (x <= 0) System.out.println("Incorrect input. Number must be > 0");
-        this.a = x;
+    public void checkValue(Context context, String aEdit, String bEdit){
+        while(!ok){
+            if (aEdit == null || bEdit == null){
+                Toast toast = Toast.makeText(context,R.string.toast_higher_than_0,duration);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            } else if (Integer.parseInt(aEdit) < 1) {
+                Toast toast = Toast.makeText(context,R.string.toast_higher_than_0, duration);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            } else if (Integer.parseInt(bEdit) < 1) {
+                Toast toast = Toast.makeText(context,R.string.toast_higher_than_0, duration);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            } else if (Integer.parseInt(bEdit) < Integer.parseInt(aEdit)) {
+                Toast toast = Toast.makeText(context,R.string.toast_higher_than_A, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            } else ok = true;
+        }
     }
-
-    public void setB(int x){
-        if (x <= 0) System.out.println("Incorrect input. Number must be > 0");
-        else if (x < this.a) System.out.println("Incorrect input. 'B' must be > 'A'");
-        this.b = x;
-    }
-
-    public void setP(int x){
-        if (x <= 0) System.out.println("Incorrect input. Number must be > 0");
-        this.p = x;
-    }*/
 
     public ArrayList<Boolean> createList(int b) throws IOException {
         ArrayList<Boolean> fillArray = new ArrayList<Boolean>();
