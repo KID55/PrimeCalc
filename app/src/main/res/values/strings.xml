@@ -4,7 +4,11 @@
     <string name="app_name">PrimeCalc</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="bHint">Ending of the range</string>
-    <string name="aHint">Beginning of the range</string>
+    <string name="aHint">Begin</string>
+    <string name="bHint">End</string>
+    <string name="toast_higher_than_0">Number must be higher than 0</string>
+    <string name="toast_higher_than_A">B must be higher than A</string>
+    <string name="no_primes">This range has no primes</string>
+
 
 </resources>

@@ -22,7 +22,7 @@ public class PrimeCalculator {
     double result = 0;
 
 
-    public void setA(int x){
+    /*public void setA(int x){
         if (x <= 0) System.out.println("Incorrect input. Number must be > 0");
         this.a = x;
     }
@@ -36,31 +36,11 @@ public class PrimeCalculator {
     public void setP(int x){
         if (x <= 0) System.out.println("Incorrect input. Number must be > 0");
         this.p = x;
-    }
+    }*/
 
     public ArrayList<Boolean> createList(int b) throws IOException {
-        //BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
         ArrayList<Boolean> fillArray = new ArrayList<Boolean>();
-        /*System.out.println("Input 'A'");
-        try {
-            setA(Integer.parseInt(is.readLine()));
-        } catch (NumberFormatException e) {
-            System.out.println("'A' must be a number!");
-        }
-        System.out.println("Input 'B'");
-        try {
-            setB(Integer.parseInt(is.readLine()));
-        } catch (NumberFormatException e) {
-            System.out.println("'B' must be a number!");
-        }
-        System.out.println("Input 'P'");
-        try {
-            setP(Integer.parseInt(is.readLine()));
-        } catch (NumberFormatException e) {
-            System.out.println("'P' must be a number!");
-        }*/
         for (int x = 0; x <= b; x++) fillArray.add(true);
-
         return fillArray;
     }
 
@@ -82,9 +62,6 @@ public class PrimeCalculator {
                 res.add(Integer.toString(y));
             }
         }
-
-
-        //if (res == ) res = "Within a predetermined range no primes";
 
         return res;
     }

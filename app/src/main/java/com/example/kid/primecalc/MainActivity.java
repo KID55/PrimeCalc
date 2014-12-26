@@ -1,37 +1,34 @@
 package com.example.kid.primecalc;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
+import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class MainActivity extends ActionBarActivity {
 
     private ListView myListView;
     ArrayList<String> myArrayList = new ArrayList<String>();
     PrimeCalculator calc = new PrimeCalculator();
+    int duration = Toast.LENGTH_LONG;
     EditText aEdit;
     EditText bEdit;
-    Button goButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         aEdit = (EditText)findViewById(R.id.aField);
         bEdit = (EditText)findViewById(R.id.bField);
         myListView = (ListView)findViewById(R.id.listView);
-        goButton = (Button)findViewById(R.id.button);
 
     }
 
@@ -59,12 +56,39 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+
     public void onClick(View view) throws IOException {
         myArrayList.clear();
-        myArrayList = calc.calc(calc.createList(Integer.parseInt(bEdit.getText().toString())),Integer.parseInt(aEdit.getText().toString()));
+        if (Integer.parseInt(aEdit.getText().toString()) < 1) {
+            Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
+            toast.show();
+            aEdit.setText(null);
+            aEdit.requestFocus();
+        } else if (Integer.parseInt(bEdit.getText().toString()) < 1) {
+            Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
+            toast.show();
+            bEdit.setText(null);
+            bEdit.requestFocus();
+        } else if (Integer.parseInt(bEdit.getText().toString()) < Integer.parseInt(aEdit.getText().toString())) {
+            Toast toast = Toast.makeText(this,R.string.toast_higher_than_A, Toast.LENGTH_LONG);
+            toast.show();
+            bEdit.setText(null);
+            bEdit.requestFocus();
+        } else {
+            myArrayList = calc.calc(calc.createList(Integer.parseInt(bEdit.getText().toString())), Integer.parseInt(aEdit.getText().toString()));
+        }
+        if (myArrayList.size() == 0) {
+            Toast toast = Toast.makeText(this,R.string.no_primes, duration);
+            toast.show();
+            aEdit.setText(null);
+            bEdit.setText(null);
+            aEdit.requestFocus();
+        }
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_list_item_1,myArrayList);
         myListView.setAdapter(aa);
         aa.notifyDataSetChanged();
+
     }
+
 
 }
