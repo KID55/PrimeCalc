@@ -78,10 +78,9 @@ public class PrimeCalculator {
         for (int k = 0; k <= a; k++) arrList.set(k, false);
 
         for (int y = 0; y < arrList.size(); y++) {
-            for (int z = 0; z < arrList.size(); z++){
             if (arrList.get(y)) {
                 res.add(Integer.toString(y));
-            }}
+            }
         }
 
 
