@@ -30,28 +30,6 @@ public class PrimeCalculator {
     double result = 0;
 
 
-    public void checkValue(Context context, String aEdit, String bEdit){
-        while(!ok){
-            if (aEdit == null || bEdit == null){
-                Toast toast = Toast.makeText(context,R.string.toast_higher_than_0,duration);
-                toast.setGravity(Gravity.CENTER,0,0);
-                toast.show();
-            } else if (Integer.parseInt(aEdit) < 1) {
-                Toast toast = Toast.makeText(context,R.string.toast_higher_than_0, duration);
-                toast.setGravity(Gravity.CENTER,0,0);
-                toast.show();
-            } else if (Integer.parseInt(bEdit) < 1) {
-                Toast toast = Toast.makeText(context,R.string.toast_higher_than_0, duration);
-                toast.setGravity(Gravity.CENTER,0,0);
-                toast.show();
-            } else if (Integer.parseInt(bEdit) < Integer.parseInt(aEdit)) {
-                Toast toast = Toast.makeText(context,R.string.toast_higher_than_A, Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER,0,0);
-                toast.show();
-            } else ok = true;
-        }
-    }
-
     public ArrayList<Boolean> createList(int b) throws IOException {
         ArrayList<Boolean> fillArray = new ArrayList<Boolean>();
         for (int x = 0; x <= b; x++) fillArray.add(true);

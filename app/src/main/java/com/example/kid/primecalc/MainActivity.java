@@ -59,13 +59,17 @@ public class MainActivity extends ActionBarActivity {
 
     public void onClick(View view) throws IOException {
         myArrayList.clear();
-        if (aEdit.getText() == null || Integer.parseInt(aEdit.getText().toString()) < 1) {
+        if (aEdit.getText().toString().equals("") || bEdit.getText().toString().equals("")){
+            Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
+        } else if (Integer.parseInt(aEdit.getText().toString()) < 1) {
             Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
             aEdit.setText(null);
             aEdit.requestFocus();
-        } else if (bEdit.getText() == null || Integer.parseInt(bEdit.getText().toString()) < 1) {
+        } else if (Integer.parseInt(bEdit.getText().toString()) < 1) {
             Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
