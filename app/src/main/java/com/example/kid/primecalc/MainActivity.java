@@ -6,19 +6,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private ListView myListView;
+    ArrayList<String> myArrayList = new ArrayList<String>();
     PrimeCalculator calc = new PrimeCalculator();
     EditText aEdit;
     EditText bEdit;
+    Button goButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
         aEdit = (EditText)findViewById(R.id.aField);
         bEdit = (EditText)findViewById(R.id.bField);
         myListView = (ListView)findViewById(R.id.listView);
+        goButton = (Button)findViewById(R.id.button);
 
     }
 
@@ -55,9 +60,11 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void onClick(View view) throws IOException {
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_list_item_1,calc.calc(calc.createList(Integer.parseInt(bEdit.getText().toString())),Integer.parseInt(aEdit.getText().toString())));
+        myArrayList.clear();
+        myArrayList = calc.calc(calc.createList(Integer.parseInt(bEdit.getText().toString())),Integer.parseInt(aEdit.getText().toString()));
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_list_item_1,myArrayList);
         myListView.setAdapter(aa);
+        aa.notifyDataSetChanged();
     }
-
 
 }

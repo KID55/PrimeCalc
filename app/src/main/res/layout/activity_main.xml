@@ -14,10 +14,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Input A"
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/bField"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,10 +24,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Input B"
         android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
+        android:layout_alignBottom="@+id/bField"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="52dp" />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -36,45 +34,57 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/aField"
-        android:layout_alignTop="@+id/textView"
+        android:textSize="20dp"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/textView"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button"
-        android:textSize="15dp" />
+        android:textAlignment="gravity"
+        android:gravity="bottom"
+        android:focusableInTouchMode="true"
+        android:hint="@string/aHint"
+        android:layout_alignRight="@+id/bField"
+        android:layout_alignEnd="@+id/bField" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:ems="10"
         android:id="@+id/bField"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toLeftOf="@+id/button"
+        android:textSize="20dp"
+        android:layout_below="@+id/aField"
+        android:layout_toRightOf="@+id/textView"
         android:layout_toStartOf="@+id/button"
-        android:textSize="15dp" />
+        android:textAlignment="gravity"
+        android:focusableInTouchMode="true"
+        android:gravity="bottom"
+        android:hint="@string/bHint"
+        android:ems="10"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GO!"
         android:id="@+id/button"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/bField"
-        android:layout_alignTop="@+id/aField"
         android:clickable="true"
         android:onClick="onClick"
-        android:enabled="true" />
+        android:enabled="true"
+        android:textSize="30dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:id="@+id/listView"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp"
+        android:textSize="30dp"
+        android:textAlignment="gravity"
+        android:layout_below="@+id/button"
+        android:layout_alignRight="@+id/bField"
+        android:layout_alignEnd="@+id/bField"
         android:layout_marginBottom="208dp"
         android:layout_alignParentBottom="true" />
 

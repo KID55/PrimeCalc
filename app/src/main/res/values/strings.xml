@@ -4,5 +4,7 @@
     <string name="app_name">PrimeCalc</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="bHint">Ending of the range</string>
+    <string name="aHint">Beginning of the range</string>
 
 </resources>
