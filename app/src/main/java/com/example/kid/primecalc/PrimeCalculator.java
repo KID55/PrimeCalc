@@ -13,9 +13,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by KID on 25.12.2014.
+ * Created by KID on 24.12.2014.
  */
-
 
 public class PrimeCalculator {
     private int a;
