@@ -15,25 +15,25 @@ import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
 
-    private ListView myListView;
-    private ListView mySuperListView;
-    ArrayList<String> myArrayList = new ArrayList<>();
-    ArrayList<String> mySuperArrayList = new ArrayList<>();
-    PrimeCalculator calc = new PrimeCalculator();
-    public static int duration = Toast.LENGTH_LONG;
-    EditText aEdit;
-    EditText bEdit;
-    EditText pEdit;
+    private ListView myListView; // Список найденных простых чисел
+    private ListView mySuperListView; // Список найденных массивов
+    ArrayList<String> myArrayList = new ArrayList<>(); // Коллекция найденных простых чисел
+    ArrayList<String> mySuperArrayList = new ArrayList<>(); // Коллекция найденных массивов
+    PrimeCalculator calc = new PrimeCalculator(); // Объект PrimeCalculator
+    public static int duration = Toast.LENGTH_LONG; // Время отображения тост-уведомления
+    EditText aEdit; // Объект, который будет брать значение А из поля ввода
+    EditText bEdit; // Объект, который будет брать значение В из поля ввода
+    EditText pEdit; // Объект, который будет брать значение Р из поля ввода
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        aEdit = (EditText)findViewById(R.id.aField);
-        bEdit = (EditText)findViewById(R.id.bField);
-        pEdit = (EditText)findViewById(R.id.pField);
-        myListView = (ListView)findViewById(R.id.listView);
-        mySuperListView = (ListView)findViewById(R.id.listView2);
+        aEdit = (EditText)findViewById(R.id.aField); // Связываем
+        bEdit = (EditText)findViewById(R.id.bField); // объекты
+        pEdit = (EditText)findViewById(R.id.pField); // и поля ввода
+        myListView = (ListView)findViewById(R.id.listView); // а также списки
+        mySuperListView = (ListView)findViewById(R.id.listView2); //с соответствующими элементами на активности
     }
 
 
@@ -60,58 +60,66 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-
+    /**
+     * Обработка клика на кнопку GO!
+     */
     public void onClick(View view) throws IOException {
-        myArrayList.clear();
-        if (aEdit.getText().toString().equals("") || bEdit.getText().toString().equals("")){
+        myArrayList.clear(); // Очищаем лист найденных простых чисел, нужно для многократного использования без засирания списка
+        if (aEdit.getText().toString().equals("") || bEdit.getText().toString().equals("")){ // Проверка на пустые поля
             Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-        } else if (Integer.parseInt(aEdit.getText().toString()) < 1) {
+        } else if (Integer.parseInt(aEdit.getText().toString()) < 1) { // Проверка на значение меньше 1
             Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
             aEdit.setText(null);
             aEdit.requestFocus();
-        } else if (Integer.parseInt(bEdit.getText().toString()) < 1) {
+        } else if (Integer.parseInt(bEdit.getText().toString()) < 1) { // Проверка на значение меньше 1
             Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
             bEdit.setText(null);
             bEdit.requestFocus();
-        } else if (Integer.parseInt(bEdit.getText().toString()) < Integer.parseInt(aEdit.getText().toString())) {
+        } else if (Integer.parseInt(bEdit.getText().toString()) < Integer.parseInt(aEdit.getText().toString())) { // Проверка на А > В
             Toast toast = Toast.makeText(this,R.string.toast_higher_than_A, Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
             bEdit.setText(null);
             bEdit.requestFocus();
         } else {
+            // Находим простые числа, (да ужасно смотрится, но это работает. Надеюсь в будущем я научусь не писать такой гавнокод)
             myArrayList = calc.calc(calc.createList(Integer.parseInt(bEdit.getText().toString())), Integer.parseInt(aEdit.getText().toString()));
         }
-        if (myArrayList.size() == 0) {
+        if (myArrayList.size() == 0) { // Проверка на отсутствие простых чисел в диапазоне
             Toast toast = Toast.makeText(this,R.string.no_primes, duration);
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
         }
-        ArrayAdapter<String> aa = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,myArrayList);
-        myListView.setAdapter(aa);
-        aa.notifyDataSetChanged();
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,myArrayList); // Создаем адаптер
+        myListView.setAdapter(aa); // Подключаем адаптер
+        aa.notifyDataSetChanged(); // Напоминаем адаптеру, чтоб не забыл почистить ListView перед следующим использованием
 
     }
 
+    /**
+     * Метод для нахождения массива случайных чисел с максимально близким к заданному средним-арифметическим модулей разностей
+     * всех элементов массива.
+     */
     public void onSuperClick(View view) throws IOException {
-        mySuperArrayList.clear();
-        if (pEdit.getText().toString().equals("")){
+        mySuperArrayList.clear(); // Очищаем лист найденных простых чисел, нужно для многократного использования без засирания списка
+        if (pEdit.getText().toString().equals("")){ // Проверка на пустые поля
             Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         } else {
-            for (int i = 0; i < Integer.parseInt(pEdit.getText().toString()); i++){
+            for (int i = 0; i < Integer.parseInt(pEdit.getText().toString()); i++){ // Находим число массивов равное Р (иногда правда находит)
+                // Находим и добавляем массив в коллекцию (да, опять километровые строчки)
                 mySuperArrayList.add(calc.calcRandomArray(calc.createList(Integer.parseInt(bEdit.getText().toString())), Integer.parseInt(aEdit.getText().toString()), Integer.parseInt(pEdit.getText().toString())));
             }
-        ArrayAdapter<String> aa1 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mySuperArrayList);
-        mySuperListView.setAdapter(aa1);
-        aa1.notifyDataSetChanged();
+        ArrayAdapter<String> aa1 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mySuperArrayList); // Создаем адаптер
+        mySuperListView.setAdapter(aa1); // Подключаем его
+        aa1.notifyDataSetChanged(); // Напоминалка для очистки ListView
         }
 
     }
