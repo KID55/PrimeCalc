@@ -1,6 +1,5 @@
 package com.example.kid.primecalc;
 
-import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -17,11 +16,14 @@ import java.util.ArrayList;
 public class MainActivity extends ActionBarActivity {
 
     private ListView myListView;
-    ArrayList<String> myArrayList = new ArrayList<String>();
+    private ListView mySuperListView;
+    ArrayList<String> myArrayList = new ArrayList<>();
+    ArrayList<String> mySuperArrayList = new ArrayList<>();
     PrimeCalculator calc = new PrimeCalculator();
     public static int duration = Toast.LENGTH_LONG;
     EditText aEdit;
     EditText bEdit;
+    EditText pEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,9 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         aEdit = (EditText)findViewById(R.id.aField);
         bEdit = (EditText)findViewById(R.id.bField);
+        pEdit = (EditText)findViewById(R.id.pField);
         myListView = (ListView)findViewById(R.id.listView);
+        mySuperListView = (ListView)findViewById(R.id.listView2);
     }
 
 
@@ -61,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
         myArrayList.clear();
         if (aEdit.getText().toString().equals("") || bEdit.getText().toString().equals("")){
             Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
-            toast.setGravity(Gravity.CENTER,0,0);
+            toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         } else if (Integer.parseInt(aEdit.getText().toString()) < 1) {
             Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
@@ -89,11 +93,26 @@ public class MainActivity extends ActionBarActivity {
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
         }
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_list_item_1,myArrayList);
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,myArrayList);
         myListView.setAdapter(aa);
         aa.notifyDataSetChanged();
 
     }
 
+    public void onSuperClick(View view) throws IOException {
+        mySuperArrayList.clear();
+        if (pEdit.getText().toString().equals("")){
+            Toast toast = Toast.makeText(this,R.string.toast_higher_than_0, duration);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        } else {
+            for (int i = 0; i < Integer.parseInt(pEdit.getText().toString()); i++){
+                mySuperArrayList.add(calc.calcRandomArray(calc.createList(Integer.parseInt(bEdit.getText().toString())), Integer.parseInt(aEdit.getText().toString()), Integer.parseInt(pEdit.getText().toString())));
+            }
+        ArrayAdapter<String> aa1 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mySuperArrayList);
+        mySuperListView.setAdapter(aa1);
+        aa1.notifyDataSetChanged();
+        }
 
+    }
 }

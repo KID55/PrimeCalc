@@ -9,6 +9,7 @@
     <string name="toast_higher_than_0">Number must be higher than 0</string>
     <string name="toast_higher_than_A">B must be higher than A</string>
     <string name="no_primes">This range has no primes</string>
+    <string name="listView">listView</string>
 
 
 </resources>

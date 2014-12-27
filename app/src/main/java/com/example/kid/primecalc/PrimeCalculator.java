@@ -78,19 +78,42 @@ public class PrimeCalculator {
         for (int z = 0; z < arrList.size(); z++){
             if (arrList.get(z)) intArrList.add(z);
         }
+
+
         rezArrList.add(intArrList.get(rand.nextInt(intArrList.size())));
-        counter++;
-        while (result >= p+1 || result <= p-1 || result != p){
-            rezArrList.add(intArrList.get(rand.nextInt(intArrList.size())));
-            counter++;
+        rezArrList.add(intArrList.get(rand.nextInt(intArrList.size())));
+        for (int i = 0; i < rezArrList.size()-1; i++){
+            for (int j = i+1; j < rezArrList.size(); j++){
+                preresult += Math.abs(rezArrList.get(i)-rezArrList.get(j));
+                counter++;
+            }
+        }
+        int index = intArrList.indexOf(rezArrList.get(rezArrList.size()-1));
+        int size = intArrList.size();
+        result = preresult/counter;
+        double p_min = p - 1.0;
+        double p_max = p + 1.0;
+        double eps = 1.0e-2;
+        while (!(result >= p_min+eps && result <= p_max+eps)){
+            preresult = 0.0;
+            counter = 0;
+            if (rezArrList.get(rezArrList.size()-1) == intArrList.get(size-1)){
+                rezArrList.add(intArrList.get(rand.nextInt(size-1)));
+            } else if (result >= p+0.5){
+                rezArrList.add(intArrList.get(rand.nextInt(index)));
+            } else if (result < p-0.5){
+                rezArrList.add(intArrList.get(rand.nextInt(size-index)+index));
+            }
             for (int i = 0; i < rezArrList.size()-1; i++){
-                for (int j = 1; j < rezArrList.size(); j++){
+                for (int j = i+1; j < rezArrList.size(); j++){
                     preresult += Math.abs(rezArrList.get(i)-rezArrList.get(j));
+                    counter++;
                 }
             }
             result = preresult/counter;
         }
         resRandom = rezArrList.toString();
+        rezArrList.clear();
         return resRandom;
     }
 }
